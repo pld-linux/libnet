@@ -8,6 +8,7 @@ Epoch:		1
 License:	BSD
 Group:		Libraries
 Source0:	http://www.packetfactory.net/libnet/dist/%{name}-%{version}.tar.gz
+# Source0-md5:	b46e650d9d0e7ad5ef9439c7cd281922
 Patch0:		%{name}-shared.patch
 URL:		http://www.packetfactory.net/libnet/
 BuildRequires:	autoconf
