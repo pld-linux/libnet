@@ -3,7 +3,7 @@ Summary(pl):	Biblioteka czynno¶ci sieciowych
 Summary(pt_BR):	API para funções de rede de baixo nível
 Name:		libnet
 Version:	1.1.0
-Release:	1
+Release:	2
 Epoch:		1
 License:	BSD
 Group:		Libraries
@@ -68,6 +68,20 @@ Biblioteka statyczna libnet.
 Arquivos de cabeçalho e bibliotecas usadas no desenvolvimento de
 aplicativos estáticos que usam libnet.
 
+%package examples
+Summary:        Static libnet library - example programs
+Summary(pl):    Static libnet library - programy przyk³adowe
+Group:          Development/Libraries
+Requires:       %{name}-devel = %{version}
+Requires:       %{name}-static = %{version}
+
+%description examples
+Static libnet library - example programs.
+
+%description examples -l pl
+Static libnet library - programy przyk³adowe.
+
+
 %prep
 %setup -q -n Libnet-latest
 #%patch0 -p1
@@ -81,14 +95,14 @@ aplicativos estáticos que usam libnet.
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	MAN_PREFIX=%{_mandir}/man3
 
-ln -sf libnet.so.1.0	$RPM_BUILD_ROOT%{_libdir}/libnet.so
-ln -sf libnet.so	$RPM_BUILD_ROOT%{_libdir}/libpwrite.so
 ln -sf libnet.a		$RPM_BUILD_ROOT%{_libdir}/libpwrite.a
+install sample/*.[ch]	$RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -98,13 +112,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README doc/CHANGELOG*
-%attr(755,root,root) %{_libdir}/lib*.so.*.*
+%doc README doc/{CHANGELOG,MIGRATION,SUPPORTED_PROTOCOLS,PACKET_BUILDING}
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/*
-%attr(755,root,root) %{_libdir}/lib*.so
 %{_includedir}/*.h
 %{_includedir}/libnet
 %{_mandir}/man*/*
@@ -112,3 +123,7 @@ rm -rf $RPM_BUILD_ROOT
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/lib*.a
+
+%files examples
+%defattr(644,root,root,755)
+%{_examplesdir}/%{name}-%{version}
