@@ -74,7 +74,7 @@ aplicativos estáticos que usam libnet.
 
 %build
 aclocal
-autoconf
+%{__autoconf}
 %configure \
 	--with-pf_packet=yes
 %{__make} CFLAGS="%{rpmcflags}"
