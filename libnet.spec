@@ -73,8 +73,8 @@ aplicativos estáticos que usam libnet.
 #%patch0 -p1
 
 %build
-#%{__aclocal}
-#%{__autoconf}
+#%%{__aclocal}
+#%%{__autoconf}
 %configure2_13 \
 	--with-pf_packet=yes
 %{__make} CFLAGS="%{rpmcflags}"
