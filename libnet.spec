@@ -90,17 +90,15 @@ ln -sf libnet.so.1.0	$RPM_BUILD_ROOT%{_libdir}/libnet.so
 ln -sf libnet.so	$RPM_BUILD_ROOT%{_libdir}/libpwrite.so
 ln -sf libnet.a		$RPM_BUILD_ROOT%{_libdir}/libpwrite.a
 
-gzip -9nf README doc/CHANGELOG*
+%clean
+rm -rf $RPM_BUILD_ROOT
 
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
 %files
 %defattr(644,root,root,755)
-%doc *.gz doc/*.gz
+%doc README doc/CHANGELOG*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 
 %files devel
