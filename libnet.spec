@@ -37,7 +37,7 @@ Requires:	%{name} = %{version}
 %description devel
 Header files and develpment documentation for libnet.
 
-%description -l pl devel
+%description devel -l pl
 Pliki nag³ówkowe i dokumetacja do libnet.
 
 %package static
@@ -49,7 +49,7 @@ Requires:	%{name}-devel = %{version}
 %description static
 Static libnet library.
 
-%description -l pl static
+%description static -l pl
 Biblioteka statyczna libnet.
 
 %prep
