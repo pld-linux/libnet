@@ -65,6 +65,8 @@ Biblioteka statyczna libnet.
 %patch0 -p1
 
 %build
+aclocal
+autoconf
 %configure \
 	--with-pf_packet=yes
 %{__make} CFLAGS="%{rpmcflags}"
