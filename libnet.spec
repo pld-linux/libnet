@@ -2,7 +2,7 @@ Summary:	"libpwrite" Network Routine Library
 Summary(pl):	Biblioteka czynno¶ci sieciowych
 Name:		libnet
 Version:	1.0.2a
-Release:	3
+Release:	4
 Epoch:		1
 License:	BSD
 Group:		Libraries
