@@ -2,7 +2,7 @@ Summary:	"libpwrite" Network Routine Library
 Summary(pl):	Biblioteka czynno¶ci sieciowych
 Name:		libnet
 Version:	1.0.2a
-Release:	2
+Release:	3
 Epoch:		1
 License:	BSD
 Group:		Libraries
@@ -13,6 +13,8 @@ Group(pl):	Biblioteki
 Source0:	http://www.packetfactory.net/libnet/dist/%{name}-%{version}.tar.gz
 Patch0:		%{name}-shared.patch
 URL:		http://www.packetfactory.net/libnet/
+BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	libpcap-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
