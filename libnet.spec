@@ -73,7 +73,8 @@ aplicativos estáticos que usam libnet.
 %patch0 -p1
 
 %build
-aclocal
+install %{_datadir}/automake/config.* .
+%{__aclocal}
 %{__autoconf}
 %configure \
 	--with-pf_packet=yes
