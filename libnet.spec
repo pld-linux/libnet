@@ -2,14 +2,15 @@ Summary:	"libpwrite" Network Routine Library
 Summary(pl):	Biblioteka czynno¶ci sieciowych
 Summary(pt_BR):	API para funções de rede de baixo nível
 Name:		libnet
-Version:	1.1.0
-Release:	4
+Version:	1.1.1
+Release:	1
 Epoch:		1
 License:	BSD
 Group:		Libraries
 Source0:	http://www.packetfactory.net/libnet/dist/%{name}-%{version}.tar.gz
-# Source0-md5:	b46e650d9d0e7ad5ef9439c7cd281922
+# Source0-md5:	d72d07923bbe7c547b40c55d1a4df79d
 Patch0:		%{name}-shared.patch
+Patch1:		%{name}-am.patch
 URL:		http://www.packetfactory.net/libnet/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -84,8 +85,9 @@ libnet - example programs.
 libnet - programy przyk³adowe.
 
 %prep
-%setup -q -n Libnet-latest
+%setup -q -n libnet
 %patch0 -p1
+%patch1 -p1
 
 %build
 %{__libtoolize}
@@ -98,15 +100,15 @@ libnet - programy przyk³adowe.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+install -d $RPM_BUILD_ROOT{%{_examplesdir}/%{name}-%{version},%{_mandir}/man3}
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT \
-	MAN_PREFIX=%{_mandir}/man3
+	DESTDIR=$RPM_BUILD_ROOT
 
 ln -sf libnet.so	$RPM_BUILD_ROOT%{_libdir}/libpwrite.so
 ln -sf libnet.a		$RPM_BUILD_ROOT%{_libdir}/libpwrite.a
 install sample/*.[ch]	$RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+install doc/man/man3/libnet-functions.h.3 $RPM_BUILD_ROOT/%{_mandir}/man3
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -116,7 +118,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README doc/{CHANGELOG,MIGRATION,SUPPORTED_PROTOCOLS,PACKET_BUILDING}
+%doc README doc/{CHANGELOG,MIGRATION,PACKET_BUILDING}
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 
 %files devel
