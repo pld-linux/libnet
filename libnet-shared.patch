@@ -1,6 +1,6 @@
-diff -urN Libnet-1.0.1b.org/Makefile.in Libnet-1.0.1b/Makefile.in
---- Libnet-1.0.1b.org/Makefile.in	Mon Nov 20 18:19:34 2000
-+++ Libnet-1.0.1b/Makefile.in	Mon Nov 20 18:35:05 2000
+diff -ur Libnet-1.0.2a.orig/Makefile.in Libnet-1.0.2a/Makefile.in
+--- Libnet-1.0.2a.orig/Makefile.in	Mon Feb  5 18:51:41 2001
++++ Libnet-1.0.2a/Makefile.in	Sat Jun  2 22:49:59 2001
 @@ -20,7 +20,10 @@
  
  LIBNET      =   libnet
@@ -15,13 +15,13 @@ diff -urN Libnet-1.0.1b.org/Makefile.in Libnet-1.0.1b/Makefile.in
  INCLUDE-H   =   include/$(LIBNET)/$(LIBNET)-headers.h
 @@ -38,6 +41,7 @@
  ENSUREDIR   =   $(srcdir)/ensure-dir.sh
- INSTALL     =   $(srcdir)/install-sh
+ INSTALL_DATA=   $(srcdir)/install-sh
  CFLAGS      =   @CFLAGS@
 +CFLAGSSHARE =	-shared -Wl,-soname,$(LIBNET).so.$(MAJ).$(MIN)
  CPPFLAGS    =   @CPPFLAGS@
  OBJECTS     =   src/libnet_resolve.o\
  		src/libnet_socket.o\
-@@ -66,16 +70,52 @@
+@@ -67,16 +71,53 @@
  		src/libnet_if_addr.o\
  		src/libnet_port_list.o 
  
@@ -47,6 +47,7 @@ diff -urN Libnet-1.0.1b.org/Makefile.in Libnet-1.0.1b/Makefile.in
 +		src/libnet_build_snmp_pic.o\
 +		src/libnet_build_rip_pic.o\
 +		src/libnet_build_ospf_pic.o\
++		src/libnet_build_vrrp_pic.o\
 +		src/libnet_asn1_pic.o\
 +		src/libnet_hex_dump_pic.o\
 +		src/libnet_if_addr_pic.o\
@@ -77,17 +78,15 @@ diff -urN Libnet-1.0.1b.org/Makefile.in Libnet-1.0.1b/Makefile.in
  version.o: version.h
  version.h: ./VERSION
  	@rm -f $@
-@@ -97,9 +137,11 @@
+@@ -98,7 +139,10 @@
  	$(ENSUREDIR) $(DESTDIR)$(INC_PREFIX) 755
  	$(ENSUREDIR) $(DESTDIR)$(MAN_PREFIX) 755
  	$(ENSUREDIR) $(DESTDIR)$(BIN_PREFIX) 755
--	$(INSTALL) -c -m 0644 $(LIB) $(DESTDIR)$(LIB_PREFIX)
-+	$(INSTALL) -c -m 0644 $(LIBSTATIC) $(DESTDIR)$(LIB_PREFIX)
-+	$(INSTALL) -c -m 0755 $(LIBSHARED) $(DESTDIR)$(LIB_PREFIX)
+-	$(INSTALL_DATA) $(LIB) $(DESTDIR)$(LIB_PREFIX)
++	$(INSTALL_DATA) -c -m 0644 $(LIBSTATIC) $(DESTDIR)$(LIB_PREFIX)
++	$(INSTALL_DATA) -c -m 0755 $(LIBSHARED) $(DESTDIR)$(LIB_PREFIX)
 +	$(LN) -f -s $(LIBSHARED) $(DESTDIR)$(LIB_PREFIX)$(LIBNET).so
- 	rm -f $(DESTDIR)$(LIB_PREFIX)$(LIBPWRITE)
--	$(LN) -f -s $(DESTDIR)$(LIB_PREFIX)$(LIBNET).a $(DESTDIR)$(LIB_PREFIX)$(LIBPWRITE)
-+	$(LN) -f -s $(LIBSHARED) $(DESTDIR)$(LIB_PREFIX)$(LIBPWRITE)
- 	$(INSTALL) -c -m 0644 $(INCLUDE) $(DESTDIR)$(INC_PREFIX)
- 	$(INSTALL) -c -m 0644 $(INCLUDE-H) $(DESTDIR)$(INC_PREFIX)$(LIBNET)
- 	$(INSTALL) -c -m 0644 $(INCLUDE-F) $(DESTDIR)$(INC_PREFIX)$(LIBNET)
++	$(LN) -f -s $(LIBSHARED) $(DESTDIR)$(LIB_PREFIX)$(LIBPWRITE).so
+ 	rm -f $(DESTDIR)$(LIB_PREFIX)$(LIBPWRITE).a
+ 	cd $(DESTDIR)$(LIB_PREFIX); $(LN) -f -s $(LIBNET).a $(LIBPWRITE).a
+ 	$(INSTALL_DATA) $(INCLUDE) $(DESTDIR)$(INC_PREFIX)
