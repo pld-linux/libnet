@@ -7,6 +7,7 @@ Epoch:		1
 License:	BSD
 Group:		Libraries
 Group(de):	Libraries
+Group(es):	Bibliotecas
 Group(fr):	Librairies
 Group(pl):	Biblioteki
 Source0:	http://www.packetfactory.net/libnet/dist/%{name}-%{version}.tar.gz
@@ -66,7 +67,7 @@ Biblioteka statyczna libnet.
 %build
 %configure \
 	--with-pf_packet=yes
-%{__make} CFLAGS="$RPM_OPT_FLAGS"
+%{__make} CFLAGS="%{rpmcflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
