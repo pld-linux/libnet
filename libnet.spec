@@ -11,7 +11,7 @@ Patch:		libnet-autoconf.patch
 URL:		http://www.packetfactory.net/libnet
 BuildRequires:	libpcap-devel
 Requires:	libpcap-devel
-BuildRoot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 Libnet is a collection of routines to help with the construction and sending
