@@ -2,13 +2,13 @@ Summary:	C library for portable packet creation and injection
 Summary(pl):	Biblioteka C do przeno¶nego tworzenia i wprowadzania pakietów
 Summary(pt_BR):	API para funções de rede de baixo nível
 Name:		libnet
-Version:	1.1.1
+Version:	1.1.2
 Release:	1
 Epoch:		1
 License:	BSD
 Group:		Libraries
 Source0:	http://www.packetfactory.net/libnet/dist/%{name}-%{version}.tar.gz
-# Source0-md5:	d72d07923bbe7c547b40c55d1a4df79d
+# Source0-md5:	093659d1e5376ffcf0eca7a4413f535f
 Patch0:		%{name}-shared.patch
 Patch1:		%{name}-am.patch
 URL:		http://www.packetfactory.net/libnet/
@@ -46,7 +46,7 @@ Summary:	Header files and develpment documentation for libnet
 Summary(pl):	Pliki nag³ówkowe i dokumetacja do libnet
 Summary(pt_BR):	Arquivos do pacote libnet para desenvolvimento
 Group:		Development/Libraries
-Requires:	%{name} = %{epoch}:%{version}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description devel
 Header files and develpment documentation for libnet.
@@ -63,7 +63,7 @@ Summary:	Static libnet library
 Summary(pl):	Biblioteka statyczna libnet
 Summary(pt_BR):	Arquivos do pacote libnet para desenvolvimento estático
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{epoch}:%{version}
+Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 
 %description static
 Static libnet library.
@@ -79,8 +79,7 @@ aplicativos estáticos que usam libnet.
 Summary:	libnet - example programs
 Summary(pl):	libnet - programy przyk³adowe
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{epoch}:%{version}
-Requires:	%{name}-static = %{epoch}:%{version}
+Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 
 %description examples
 libnet - example programs.
