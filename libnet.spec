@@ -1,5 +1,5 @@
-Summary:	"libpwrite" Network Routine Library
-Summary(pl):	Biblioteka czynno¶ci sieciowych
+Summary:	C library for portable packet creation and injection
+Summary(pl):	Biblioteka C do przeno¶nego tworzenia i wprowadzania pakietów
 Summary(pt_BR):	API para funções de rede de baixo nível
 Name:		libnet
 Version:	1.1.1
@@ -14,7 +14,6 @@ Patch1:		%{name}-am.patch
 URL:		http://www.packetfactory.net/libnet/
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	libpcap-devel
 BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -29,8 +28,13 @@ link layer as well as a host of supplementary and complementary
 functionality.
 
 %description -l pl
-Biblioteka dostarcza API dla popularnych nisko-poziomowych funkcji
-sieciowych (g³ównie wstrzykuj±cych pakiety).
+Biblioteka dostarcza API dla popularnych niskopoziomowych funkcji
+sieciowych (g³ównie wprowadzania pakietów). Przy u¿yciu libnet mo¿na
+³atwo stworzyæ dowolne pakiety sieciowe. Biblioteka dostarcza
+przeno¶ny szkielet do niskopoziomowego zapisu i obs³ugi pakietów
+sieciowych (w po³±czeniu z libpcap mo¿na napisaæ co¶ naprawdê
+fajnego). Libnet obejmuje tworzenie pakietów w warstwie IP i
+po³±czenia, a tak¿e funkcjonalno¶æ dodatkow± i uzupe³niaj±c±.
 
 %description -l pt_BR
 Este pacote fornece uma API simples para funções de rede de baixo
@@ -85,7 +89,7 @@ libnet - example programs.
 libnet - programy przyk³adowe.
 
 %prep
-%setup -q -n libnet
+%setup -q -n %{name}
 %patch0 -p1
 %patch1 -p1
 
@@ -96,7 +100,8 @@ libnet - programy przyk³adowe.
 %{__automake}
 %configure \
 	--with-pf_packet=yes
-%{__make} CFLAGS="%{rpmcflags}"
+%{__make} \
+	CFLAGS="%{rpmcflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
