@@ -6,34 +6,36 @@ Release:	1
 Epoch:		1
 License:	BSD
 Group:		Libraries
-Group(pl):	Biblioteki
+Group(de):	Libraries
 Group(fr):	Librairies
+Group(pl):	Biblioteki
 Source0:	http://www.packetfactory.net/libnet/dist/%{name}-%{version}.tar.gz
-Patch0:		libnet-shared.patch
+Patch0:		%{name}-shared.patch
 URL:		http://www.packetfactory.net/libnet/
 BuildRequires:	libpcap-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-The Network Library provides a simple API for commonly used
-low-level network functions (mainly packet injection). Using
-libnet, it is easy to build and write arbitrary network packets.
-It provides a portable framework for low-level network packet
-writing and handling (use libnet in conjunction with libpcap
-and you can write some really cool stuff). Libnet includes
-packet creation at the IP layer and at the link layer as well
-as a host of supplementary and complementary functionality.
+The Network Library provides a simple API for commonly used low-level
+network functions (mainly packet injection). Using libnet, it is easy
+to build and write arbitrary network packets. It provides a portable
+framework for low-level network packet writing and handling (use
+libnet in conjunction with libpcap and you can write some really cool
+stuff). Libnet includes packet creation at the IP layer and at the
+link layer as well as a host of supplementary and complementary
+functionality.
 
 %description -l pl
-Biblioteka dostarcza API dla popularnych nisko-poziomowych
-funkcji sieciowych (g³ównie wstrzykuj±cych pakiety).
+Biblioteka dostarcza API dla popularnych nisko-poziomowych funkcji
+sieciowych (g³ównie wstrzykuj±cych pakiety).
 
 %package devel
 Summary:	Header files and develpment documentation for libnet
 Summary(pl):	Pliki nag³ówkowe i dokumetacja do libnet
 Group:		Development/Libraries
-Group(pl):	Programowanie/Biblioteki
+Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
+Group(pl):	Programowanie/Biblioteki
 Requires:	%{name} = %{version}
 
 %description devel
@@ -46,8 +48,9 @@ Pliki nag³ówkowe i dokumetacja do libnet.
 Summary:	Static libnet library
 Summary(pl):	Biblioteka statyczna libnet
 Group:		Development/Libraries
-Group(pl):	Programowanie/Biblioteki
+Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
+Group(pl):	Programowanie/Biblioteki
 Requires:	%{name}-devel = %{version}
 
 %description static
@@ -68,15 +71,13 @@ Biblioteka statyczna libnet.
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} \
+%{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	MAN_PREFIX=%{_mandir}/man3 \
-	install
+	MAN_PREFIX=%{_mandir}/man3
 
-ln -sf	libnet.so	$RPM_BUILD_ROOT%{_libdir}/libpwrite
+ln -sf libnet.so $RPM_BUILD_ROOT%{_libdir}/libpwrite
 
-gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man*/* \
-	README doc/CHANGELOG*
+gzip -9nf README doc/CHANGELOG*
 
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
