@@ -54,13 +54,13 @@ autoconf
 %configure \
 	--with-pf_packet=yes
 
-make CFLAGS="$RPM_OPT_FLAGS -funroll-loops -fomit-frame-pointer -Wall"
+%{__make} CFLAGS="$RPM_OPT_FLAGS -funroll-loops -fomit-frame-pointer -Wall"
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_prefix}/src/examples/libnet/libnet-examples
 
-make install DESTDIR=$RPM_BUILD_ROOT
+%{__make} install DESTDIR=$RPM_BUILD_ROOT
 
 ln -sf libnet.a $RPM_BUILD_ROOT%{_libdir}/libpwrite.a
 cp -r example/* $RPM_BUILD_ROOT%{_prefix}/src/examples/libnet/libnet-examples
