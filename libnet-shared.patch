@@ -1,6 +1,6 @@
 diff -urN Libnet-1.0.1b.org/Makefile.in Libnet-1.0.1b/Makefile.in
---- Libnet-1.0.1b.org/Makefile.in	Thu Nov  2 00:47:45 2000
-+++ Libnet-1.0.1b/Makefile.in	Thu Nov  2 01:33:34 2000
+--- Libnet-1.0.1b.org/Makefile.in	Mon Nov 20 18:19:34 2000
++++ Libnet-1.0.1b/Makefile.in	Mon Nov 20 18:35:05 2000
 @@ -20,7 +20,10 @@
  
  LIBNET      =   libnet
@@ -69,8 +69,8 @@ diff -urN Libnet-1.0.1b.org/Makefile.in Libnet-1.0.1b/Makefile.in
 +	$(RANLIB) $(LIBSTATIC)
 +
 +$(LIBSHARED): version.h $(OBJECTSHARE)
-+	$(CC) $(CFLAGSSHARE) -o $(LIBSHARED) $(OBJ_PIC) -lc
-+	ln -s $(LIBSHARED) lib/libnet.so
++	$(CC) $(CFLAGSSHARE) -o $(LIBSHARED) $(OBJECTSHARE)
++	ln -s $(LIBSHARED) libnet.so
  
 +libnet:	$(LIBSTATIC) $(LIBSHARED)
 +	
