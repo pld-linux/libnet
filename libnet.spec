@@ -9,19 +9,20 @@ Group(pl):	Programowanie/Biblioteki
 Source:		http://www.packetfactory.net/libnet/dist/%{name}-%{version}.tgz
 Patch:		libnet-autoconf.patch
 URL:		http://www.packetfactory.net/libnet
-BuildPreReq:	libpcap-devel
+BuildRequires:	libpcap-devel
+Requires:	libpcap-devel
 BuildRoot:	/tmp/%{name}-%{version}-root
 
 %description
-Libnet is a collection of routines to help with the construction and
-sending of network packets at the link layer and the IP layer. 
-Use libnet in conjunction with packet capture library (libpcap) 
-and you can write some really cool stuff!.
+Libnet is a collection of routines to help with the construction and sending
+of network packets at the link layer and the IP layer. Use libnet in
+conjunction with packet capture library (libpcap) and you can write some
+really cool stuff!.
 
 %description -l pl 
-Libnet jest bibliotek± na któr± sk³adaj± siê procedury pomagaj±ce
-w tworzeniu i wysy³aniu pakietów w sieciowych warstwach: danych oraz IP.
-W po³±czeniu z bibliotek± do przechwytywania pakietów (libpcap), libnet
+Libnet jest bibliotek± na któr± sk³adaj± siê procedury pomagaj±ce w
+tworzeniu i wysy³aniu pakietów w sieciowych warstwach: danych oraz IP. W
+po³±czeniu z bibliotek± do przechwytywania pakietów (libpcap), libnet
 pozwoli Ci na napisanie naprawdê fajnych rzeczy!.
 
 %prep
