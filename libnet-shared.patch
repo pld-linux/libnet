@@ -1,92 +1,99 @@
-diff -ur Libnet-1.0.2a.orig/Makefile.in Libnet-1.0.2a/Makefile.in
---- Libnet-1.0.2a.orig/Makefile.in	Mon Feb  5 18:51:41 2001
-+++ Libnet-1.0.2a/Makefile.in	Sat Jun  2 22:49:59 2001
-@@ -20,7 +20,10 @@
+--- Libnet-latest/src/Makefile.am.orig	Tue Aug  6 00:26:03 2002
++++ Libnet-latest/src/Makefile.am	Mon Mar 17 10:57:14 2003
+@@ -8,9 +8,9 @@
  
- LIBNET      =   libnet
- LIBPWRITE   =   libpwrite
--LIB         =   lib/$(LIBNET).a
-+LIBSTATIC   =   lib/$(LIBNET).a
-+MAJ         =   1
-+MIN         =	0
-+LIBSHARED   =   lib/$(LIBNET).so.$(MAJ).$(MIN)
- MAN         =   doc/$(LIBNET).3
- INCLUDE     =   include/$(LIBNET).h
- INCLUDE-H   =   include/$(LIBNET)/$(LIBNET)-headers.h
-@@ -38,6 +41,7 @@
- ENSUREDIR   =   $(srcdir)/ensure-dir.sh
- INSTALL_DATA=   $(srcdir)/install-sh
- CFLAGS      =   @CFLAGS@
-+CFLAGSSHARE =	-shared -Wl,-soname,$(LIBNET).so.$(MAJ).$(MIN)
- CPPFLAGS    =   @CPPFLAGS@
- OBJECTS     =   src/libnet_resolve.o\
- 		src/libnet_socket.o\
-@@ -67,16 +71,53 @@
- 		src/libnet_if_addr.o\
- 		src/libnet_port_list.o 
+ include $(top_srcdir)/Makefile.am.common
  
-+OBJECTSHARE =   src/libnet_resolve_pic.o\
-+		src/libnet_socket_pic.o\
-+		src/libnet_checksum_pic.o\
-+		src/libnet_prand_pic.o\
-+		src/libnet_version_pic.o\
-+		src/libnet_write_ip_pic.o\
-+		src/libnet_insert_ipo_pic.o\
-+		src/libnet_insert_tcpo_pic.o\
-+		src/libnet_error_pic.o\
-+		src/libnet_link_@LL_INT_TYPE@_pic.o\
-+		src/libnet_packet_mem_pic.o\
-+		src/libnet_build_ip_pic.o\
-+		src/libnet_build_tcp_pic.o\
-+		src/libnet_build_udp_pic.o\
-+		src/libnet_build_arp_pic.o\
-+		src/libnet_build_ethernet_pic.o\
-+		src/libnet_build_icmp_pic.o\
-+		src/libnet_build_igmp_pic.o\
-+		src/libnet_build_dns_pic.o\
-+		src/libnet_build_snmp_pic.o\
-+		src/libnet_build_rip_pic.o\
-+		src/libnet_build_ospf_pic.o\
-+		src/libnet_build_vrrp_pic.o\
-+		src/libnet_asn1_pic.o\
-+		src/libnet_hex_dump_pic.o\
-+		src/libnet_if_addr_pic.o\
-+		src/libnet_port_list_pic.o 
-+
- .c.o:
- 	$(CC) $(CFLAGS) $(CPPFLAGS) $(DEFINES) -c $< -o $@
+-lib_LIBRARIES = libnet.a
++lib_LTLIBRARIES = libnet.la
  
-+%_pic.o: %.c
-+	$(CC) -fPIC $(CFLAGS) $(CPPFLAGS) $(DEFINES) -c $< -o $@
-+	
- all: libnet
- supp: test example
+-libnet_a_SOURCES = libnet_asn1.c \
++libnet_la_SOURCES = libnet_asn1.c \
+ 			libnet_build_802.1q.c \
+ 			libnet_build_802.2.c \
+ 			libnet_build_802.3.c \
+@@ -48,4 +48,5 @@
+ 			libnet_version.c \
+ 			libnet_write.c
  
--libnet: version.h $(OBJECTS)
--	$(AR) -cr $(LIB) $(OBJECTS)
--	$(RANLIB) $(LIB)
-+$(LIBSTATIC): version.h $(OBJECTS)
-+	$(AR) -cr $(LIBSTATIC) $(OBJECTS)
-+	$(RANLIB) $(LIBSTATIC)
-+
-+$(LIBSHARED): version.h $(OBJECTSHARE)
-+	$(CC) $(CFLAGSSHARE) -o $(LIBSHARED) $(OBJECTSHARE)
-+	ln -s $(LIBSHARED) libnet.so
+-libnet_a_LIBADD = @LIBOBJS@
++libnet_la_LIBADD = @LIBOBJS@
++libnet_la_LDFLAGS = -version-info 2:0:0
+--- Libnet-latest/configure.in.orig	Tue Aug  6 00:26:03 2002
++++ Libnet-latest/configure.in	Mon Mar 17 10:59:42 2003
+@@ -20,7 +20,7 @@
+ dnl
+ AC_PROG_CC
+ AC_PROG_INSTALL
+-AC_PROG_RANLIB
++AC_PROG_LIBTOOL
  
-+libnet:	$(LIBSTATIC) $(LIBSHARED)
-+	
- version.o: version.h
- version.h: ./VERSION
- 	@rm -f $@
-@@ -98,7 +139,10 @@
- 	$(ENSUREDIR) $(DESTDIR)$(INC_PREFIX) 755
- 	$(ENSUREDIR) $(DESTDIR)$(MAN_PREFIX) 755
- 	$(ENSUREDIR) $(DESTDIR)$(BIN_PREFIX) 755
--	$(INSTALL_DATA) $(LIB) $(DESTDIR)$(LIB_PREFIX)
-+	$(INSTALL_DATA) -c -m 0644 $(LIBSTATIC) $(DESTDIR)$(LIB_PREFIX)
-+	$(INSTALL_DATA) -c -m 0755 $(LIBSHARED) $(DESTDIR)$(LIB_PREFIX)
-+	$(LN) -f -s $(LIBSHARED) $(DESTDIR)$(LIB_PREFIX)$(LIBNET).so
-+	$(LN) -f -s $(LIBSHARED) $(DESTDIR)$(LIB_PREFIX)$(LIBPWRITE).so
- 	rm -f $(DESTDIR)$(LIB_PREFIX)$(LIBPWRITE).a
- 	cd $(DESTDIR)$(LIB_PREFIX); $(LN) -f -s $(LIBNET).a $(LIBPWRITE).a
- 	$(INSTALL_DATA) $(INCLUDE) $(DESTDIR)$(INC_PREFIX)
+ AC_CHECK_HEADERS(sys/sockio.h)
+ 
+@@ -34,7 +34,6 @@
+ 
+ AC_SUBST(ENDIANESS)
+ AC_SUBST(LIBNET_VERSION)
+-AC_SUBST(LIBOBJS)
+ AC_SUBST(HAVE_PACKET_SOCKET)
+ AC_SUBST(ADDITIONAL_LIBS)
+ AC_SUBST(LIBNET_CONFIG_DEFINES)
+@@ -68,39 +67,39 @@
+ AC_MSG_CHECKING(link-layer packet interface type)
+ 
+ if test -r /dev/bpf0 ; then
+-    LIBOBJS="$LIBOBJS libnet_link_bpf.o"
++    AC_LIBOBJ([libnet_link_bpf])
+     AC_MSG_RESULT(found bpf)
+ elif test -r /usr/include/net/pfilt.h ; then
+-    LIBOBJS="$LIBOBJS libnet_link_pf.o"
++    AC_LIBOBJ([libnet_link_pf])
+     AC_MSG_RESULT(found pf)
+ elif test -r /dev/nit ; then
+-    LIBOBJS="$LIBOBJS libnet_link_snit.o"
++    AC_LIBOBJ([libnet_link_snit])
+     AC_MSG_RESULT(found snit)
+ elif test -r /usr/include/sys/net/nit.h ; then
+-    LIBOBJS="$LIBOBJS libnet_link_nit.o"
++    AC_LIBOBJ([libnet_link_nit])
+     AC_MSG_RESULT(found nit)
+ elif test -r /usr/include/net/raw.h ; then
+-    LIBOBJS="$LIBOBJS libnet_link_snoop.o"
++    AC_LIBOBJ([libnet_link_snoop])
+     AC_MSG_RESULT(found snoop)
+ elif test -r /usr/include/sys/dlpi.h ; then
+-    LIBOBJS="$LIBOBJS libnet_link_dlpi.o"
++    AC_LIBOBJ([libnet_link_dlpi])
+     AC_MSG_RESULT(found dlpi)
+     AC_DEFINE(HAVE_DLPI)
+ elif test -r /usr/include/linux/socket.h ; then
+-    LIBOBJS="$LIBOBJS libnet_link_linux.o"
++    AC_LIBOBJ([libnet_link_linux])
+     AC_MSG_RESULT(found linux primitives)
+     AC_LIBNET_CHECK_PF_PACKET
+ elif test -c /dev/bpf0 ; then           # check again in case not readable
+-    LIBOBJS="$LIBOBJS libnet_link_bpf.o"
++    AC_LIBOBJ([libnet_link_bpf])
+     AC_MSG_RESULT(found bpf)
+ elif test -c /dev/nit ; then            # check again in case not readable
+-    LIBOBJS="$LIBOBJS libnet_link_snit.o"
++    AC_LIBOBJ([libnet_link_snit])
+     AC_MSG_RESULT(found snit)
+ elif test "$target_os" = "cygwin" ; then
+-     LIBOBJS="$LIBOBJS libnet_link_win32.o"
++     AC_LIBOBJ([libnet_link_win32])
+      AC_MSG_RESULT(found win32 wpcap)
+ else
+-    LIBOBJS="$LIBOBJS libnet_link_none.o"
++    AC_LIBOBJ([libnet_link_none])
+     AC_MSG_WARN(could not find a link-layer packet interface)
+     AC_MSG_WARN(link-layer packet injection will not be available)
+ fi
+--- Libnet-latest/sample/Makefile.am.orig	Tue Aug  6 00:26:04 2002
++++ Libnet-latest/sample/Makefile.am	Mon Mar 17 11:05:48 2003
+@@ -33,4 +33,4 @@
+ icmp6_echoreq_SOURCES   = icmp6_echoreq.c
+ synflood6_SOURCES       = synflood6.c
+ 
+-LDADD = $(top_srcdir)/src/libnet.a
++LDADD = $(top_srcdir)/src/libnet.la
