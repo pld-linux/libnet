@@ -2,8 +2,8 @@ Summary:	"libpwrite" Network Routine Library
 Summary(pl):	Biblioteka czynno¶ci sieciowych
 Summary(pt_BR):	API para funções de rede de baixo nível
 Name:		libnet
-Version:	1.0.2a
-Release:	6
+Version:	1.1.0
+Release:	1
 Epoch:		1
 License:	BSD
 Group:		Libraries
@@ -69,13 +69,13 @@ Arquivos de cabeçalho e bibliotecas usadas no desenvolvimento de
 aplicativos estáticos que usam libnet.
 
 %prep
-%setup -q -n Libnet-%{version}
-%patch0 -p1
+%setup -q -n Libnet-latest
+#%patch0 -p1
 
 %build
-%{__aclocal}
-%{__autoconf}
-%configure \
+#%{__aclocal}
+#%{__autoconf}
+%configure2_13 \
 	--with-pf_packet=yes
 %{__make} CFLAGS="%{rpmcflags}"
 
