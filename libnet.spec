@@ -2,7 +2,7 @@ Summary:	"libpwrite" Network Routine Library
 Summary(pl):	Biblioteka czynno¶ci sieciowych
 Name:		libnet
 Version:	1.0.1b
-Release:	2
+Release:	3
 Epoch:		1
 License:	BSD
 Group:		Libraries
@@ -75,6 +75,7 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT \
 	MAN_PREFIX=%{_mandir}/man3
 
+(cd $RPM_BUILD_ROOT%{_libdir} ; ln -sf libnet.so.*.* libnet.so )
 ln -sf libnet.so $RPM_BUILD_ROOT%{_libdir}/libpwrite
 
 gzip -9nf README doc/CHANGELOG*
