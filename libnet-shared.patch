@@ -1,0 +1,93 @@
+diff -urN Libnet-1.0.1b.org/Makefile.in Libnet-1.0.1b/Makefile.in
+--- Libnet-1.0.1b.org/Makefile.in	Thu Nov  2 00:47:45 2000
++++ Libnet-1.0.1b/Makefile.in	Thu Nov  2 01:33:34 2000
+@@ -20,7 +20,10 @@
+ 
+ LIBNET      =   libnet
+ LIBPWRITE   =   libpwrite
+-LIB         =   lib/$(LIBNET).a
++LIBSTATIC   =   lib/$(LIBNET).a
++MAJ         =   1
++MIN         =	0
++LIBSHARED   =   lib/$(LIBNET).so.$(MAJ).$(MIN)
+ MAN         =   doc/$(LIBNET).3
+ INCLUDE     =   include/$(LIBNET).h
+ INCLUDE-H   =   include/$(LIBNET)/$(LIBNET)-headers.h
+@@ -38,6 +41,7 @@
+ ENSUREDIR   =   $(srcdir)/ensure-dir.sh
+ INSTALL     =   $(srcdir)/install-sh
+ CFLAGS      =   @CFLAGS@
++CFLAGSSHARE =	-shared -Wl,-soname,$(LIBNET).so.$(MAJ).$(MIN)
+ CPPFLAGS    =   @CPPFLAGS@
+ OBJECTS     =   src/libnet_resolve.o\
+ 		src/libnet_socket.o\
+@@ -66,16 +70,52 @@
+ 		src/libnet_if_addr.o\
+ 		src/libnet_port_list.o 
+ 
++OBJECTSHARE =   src/libnet_resolve_pic.o\
++		src/libnet_socket_pic.o\
++		src/libnet_checksum_pic.o\
++		src/libnet_prand_pic.o\
++		src/libnet_version_pic.o\
++		src/libnet_write_ip_pic.o\
++		src/libnet_insert_ipo_pic.o\
++		src/libnet_insert_tcpo_pic.o\
++		src/libnet_error_pic.o\
++		src/libnet_link_@LL_INT_TYPE@_pic.o\
++		src/libnet_packet_mem_pic.o\
++		src/libnet_build_ip_pic.o\
++		src/libnet_build_tcp_pic.o\
++		src/libnet_build_udp_pic.o\
++		src/libnet_build_arp_pic.o\
++		src/libnet_build_ethernet_pic.o\
++		src/libnet_build_icmp_pic.o\
++		src/libnet_build_igmp_pic.o\
++		src/libnet_build_dns_pic.o\
++		src/libnet_build_snmp_pic.o\
++		src/libnet_build_rip_pic.o\
++		src/libnet_build_ospf_pic.o\
++		src/libnet_asn1_pic.o\
++		src/libnet_hex_dump_pic.o\
++		src/libnet_if_addr_pic.o\
++		src/libnet_port_list_pic.o 
++
+ .c.o:
+ 	$(CC) $(CFLAGS) $(CPPFLAGS) $(DEFINES) -c $< -o $@
+ 
++%_pic.o: %.c
++	$(CC) -fPIC $(CFLAGS) $(CPPFLAGS) $(DEFINES) -c $< -o $@
++	
+ all: libnet
+ supp: test example
+ 
+-libnet: version.h $(OBJECTS)
+-	$(AR) -cr $(LIB) $(OBJECTS)
+-	$(RANLIB) $(LIB)
++$(LIBSTATIC): version.h $(OBJECTS)
++	$(AR) -cr $(LIBSTATIC) $(OBJECTS)
++	$(RANLIB) $(LIBSTATIC)
++
++$(LIBSHARED): version.h $(OBJECTSHARE)
++	$(CC) $(CFLAGSSHARE) -o $(LIBSHARED) $(OBJ_PIC) -lc
++	ln -s $(LIBSHARED) lib/libnet.so
+ 
++libnet:	$(LIBSTATIC) $(LIBSHARED)
++	
+ version.o: version.h
+ version.h: ./VERSION
+ 	@rm -f $@
+@@ -97,9 +137,11 @@
+ 	$(ENSUREDIR) $(DESTDIR)$(INC_PREFIX) 755
+ 	$(ENSUREDIR) $(DESTDIR)$(MAN_PREFIX) 755
+ 	$(ENSUREDIR) $(DESTDIR)$(BIN_PREFIX) 755
+-	$(INSTALL) -c -m 0644 $(LIB) $(DESTDIR)$(LIB_PREFIX)
++	$(INSTALL) -c -m 0644 $(LIBSTATIC) $(DESTDIR)$(LIB_PREFIX)
++	$(INSTALL) -c -m 0755 $(LIBSHARED) $(DESTDIR)$(LIB_PREFIX)
++	$(LN) -f -s $(LIBSHARED) $(DESTDIR)$(LIB_PREFIX)$(LIBNET).so
+ 	rm -f $(DESTDIR)$(LIB_PREFIX)$(LIBPWRITE)
+-	$(LN) -f -s $(DESTDIR)$(LIB_PREFIX)$(LIBNET).a $(DESTDIR)$(LIB_PREFIX)$(LIBPWRITE)
++	$(LN) -f -s $(LIBSHARED) $(DESTDIR)$(LIB_PREFIX)$(LIBPWRITE)
+ 	$(INSTALL) -c -m 0644 $(INCLUDE) $(DESTDIR)$(INC_PREFIX)
+ 	$(INSTALL) -c -m 0644 $(INCLUDE-H) $(DESTDIR)$(INC_PREFIX)$(LIBNET)
+ 	$(INSTALL) -c -m 0644 $(INCLUDE-F) $(DESTDIR)$(INC_PREFIX)$(LIBNET)
