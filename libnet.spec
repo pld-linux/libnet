@@ -13,6 +13,7 @@ URL:		http://www.packetfactory.net/libnet/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libpcap-devel
+BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -69,27 +70,28 @@ Arquivos de cabeçalho e bibliotecas usadas no desenvolvimento de
 aplicativos estáticos que usam libnet.
 
 %package examples
-Summary:        Static libnet library - example programs
-Summary(pl):    Static libnet library - programy przyk³adowe
+Summary:        libnet - example programs
+Summary(pl):    libnet - programy przyk³adowe
 Group:          Development/Libraries
 Requires:       %{name}-devel = %{version}
 Requires:       %{name}-static = %{version}
 
 %description examples
-Static libnet library - example programs.
+libnet - example programs.
 
 %description examples -l pl
-Static libnet library - programy przyk³adowe.
-
+libnet - programy przyk³adowe.
 
 %prep
 %setup -q -n Libnet-latest
-#%patch0 -p1
+%patch0 -p1
 
 %build
-#%%{__aclocal}
-#%%{__autoconf}
-%configure2_13 \
+%{__libtoolize}
+%{__aclocal}
+%{__autoconf}
+%{__automake}
+%configure \
 	--with-pf_packet=yes
 %{__make} CFLAGS="%{rpmcflags}"
 
@@ -101,6 +103,7 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 	DESTDIR=$RPM_BUILD_ROOT \
 	MAN_PREFIX=%{_mandir}/man3
 
+ln -sf libnet.so	$RPM_BUILD_ROOT%{_libdir}/libpwrite.so
 ln -sf libnet.a		$RPM_BUILD_ROOT%{_libdir}/libpwrite.a
 install sample/*.[ch]	$RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
@@ -113,9 +116,12 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README doc/{CHANGELOG,MIGRATION,SUPPORTED_PROTOCOLS,PACKET_BUILDING}
+%attr(755,root,root) %{_libdir}/lib*.so.*.*
 
 %files devel
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/lib*.so
+%{_libdir}/lib*.la
 %{_includedir}/*.h
 %{_includedir}/libnet
 %{_mandir}/man*/*
