@@ -3,7 +3,7 @@ Summary(pl):	Biblioteka C do przeno¶nego tworzenia i wprowadzania pakietów
 Summary(pt_BR):	API para funções de rede de baixo nível
 Name:		libnet
 Version:	1.1.2.1
-Release:	1
+Release:	2
 Epoch:		1
 License:	BSD
 Group:		Libraries
