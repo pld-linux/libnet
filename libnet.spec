@@ -6,13 +6,6 @@ Release:	3
 Epoch:		1
 License:	BSD
 Group:		Libraries
-Group(de):	Libraries
-Group(es):	Bibliotecas
-Group(fr):	Librairies
-Group(pl):	Biblioteki
-Group(pt_BR):	Bibliotecas
-Group(ru):	Библиотеки
-Group(uk):	Б╕бл╕отеки
 Source0:	http://www.packetfactory.net/libnet/dist/%{name}-%{version}.tar.gz
 Patch0:		%{name}-shared.patch
 URL:		http://www.packetfactory.net/libnet/
@@ -39,13 +32,6 @@ sieciowych (gЁСwnie wstrzykuj╠cych pakiety).
 Summary:	Header files and develpment documentation for libnet
 Summary(pl):	Pliki nagЁСwkowe i dokumetacja do libnet
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name} = %{version}
 
 %description devel
@@ -58,13 +44,6 @@ Pliki nagЁСwkowe i dokumetacja do libnet.
 Summary:	Static libnet library
 Summary(pl):	Biblioteka statyczna libnet
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name}-devel = %{version}
 
 %description static
