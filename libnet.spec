@@ -3,7 +3,7 @@ Summary(pl):	Biblioteka czynno¶ci sieciowych
 Summary(pt_BR):	API para funções de rede de baixo nível
 Name:		libnet
 Version:	1.0.2a
-Release:	4
+Release:	5
 Epoch:		1
 License:	BSD
 Group:		Libraries
@@ -101,11 +101,11 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc *.gz doc/*.gz
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
-%attr(755,root,root) %{_libdir}/libpwrite
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_libdir}/libpwrite
 %attr(755,root,root) %{_libdir}/lib*.so
 %{_includedir}/*.h
 %{_includedir}/libnet
