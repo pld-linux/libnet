@@ -1,7 +1,7 @@
 Summary:	Packet creation and handling library
 Summary(pl):	Biblioteka do generacji i obróbki pakietów
 Name:		libnet
-Version:	1.0
+Version:	1.0.1a
 Release:	1
 Copyright:	distributable
 Group:		Development/Libraries
@@ -25,12 +25,27 @@ tworzeniu i wysy³aniu pakietów w sieciowych warstwach: danych oraz IP. W
 po³±czeniu z bibliotek± do przechwytywania pakietów (libpcap), libnet
 pozwoli Ci na napisanie naprawdê fajnych rzeczy!.
 
+%package demo
+Summary:	Libnet library - source code of demo programs
+Summary(pl):	Biblioteka libnet - ¼ród³a programów demonstracyjnych
+Group:		Development/Libraries
+Group(pl):	Programowanie/Biblioteki
+Requires:       %{name} = %{version}
+
+%description demo
+Libnet library - source code of demo programs
+
+%description demo -l pl
+Biblioteka libnet - wersje ¼ród³owe programów demonstracyjnych
+
+
 %prep
 %setup -q -n Libnet-%{version}
 %patch -p0
 
 rm -rf doc/{.#CHANGELOG.1.13,CVS,html/CVS}
 rm -rf example/{CVS,html/CVS}
+rm -rf test/CVS test/*/CVS
 
 %build
 autoconf
@@ -41,15 +56,16 @@ make CFLAGS="$RPM_OPT_FLAGS -funroll-loops -fomit-frame-pointer -Wall"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/usr/src/examples/libnet
+install -d $RPM_BUILD_ROOT/usr/src/examples/libnet/libnet-examples
 
 make install DESTDIR=$RPM_BUILD_ROOT
 
 ln -sf libnet.a $RPM_BUILD_ROOT%{_libdir}/libpwrite.a
-cp example/*    $RPM_BUILD_ROOT/usr/src/examples/libnet
+cp -r example/*    $RPM_BUILD_ROOT/usr/src/examples/libnet/libnet-examples
+cp -r test/*    $RPM_BUILD_ROOT/usr/src/examples/libnet/
 
 gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man3/* \
-	doc/{CHANGELOG*,README*,COPYING,PORTS,TODO}
+	doc/{CHANGELOG*,README*,COPYING,TODO*}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -62,4 +78,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/*
 %{_libdir}/*.a
 %{_mandir}/man3/*
+
+%files demo
+%defattr(644,root,root,755)
 /usr/src/examples/libnet
