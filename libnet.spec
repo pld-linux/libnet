@@ -2,13 +2,13 @@ Summary:	C library for portable packet creation and injection
 Summary(pl):	Biblioteka C do przeno¶nego tworzenia i wprowadzania pakietów
 Summary(pt_BR):	API para funções de rede de baixo nível
 Name:		libnet
-Version:	1.1.2
+Version:	1.1.2.1
 Release:	1
 Epoch:		1
 License:	BSD
 Group:		Libraries
 Source0:	http://www.packetfactory.net/libnet/dist/%{name}-%{version}.tar.gz
-# Source0-md5:	093659d1e5376ffcf0eca7a4413f535f
+# Source0-md5:	be845c41170d72c7db524f3411b50256
 Patch0:		%{name}-shared.patch
 Patch1:		%{name}-am.patch
 URL:		http://www.packetfactory.net/libnet/
