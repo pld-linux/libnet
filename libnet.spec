@@ -71,11 +71,11 @@ Arquivos de cabeçalho e bibliotecas usadas no desenvolvimento de
 aplicativos estáticos que usam libnet.
 
 %package examples
-Summary:        libnet - example programs
-Summary(pl):    libnet - programy przyk³adowe
-Group:          Development/Libraries
-Requires:       %{name}-devel = %{epoch}:%{version}
-Requires:       %{name}-static = %{epoch}:%{version}
+Summary:	libnet - example programs
+Summary(pl):	libnet - programy przyk³adowe
+Group:		Development/Libraries
+Requires:	%{name}-devel = %{epoch}:%{version}
+Requires:	%{name}-static = %{epoch}:%{version}
 
 %description examples
 libnet - example programs.
