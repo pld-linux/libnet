@@ -86,10 +86,9 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT \
 	MAN_PREFIX=%{_mandir}/man3
 
-ln -sf libnet.so.1.0 $RPM_BUILD_ROOT%{_libdir}/libnet.so
-ln -sf libnet.so $RPM_BUILD_ROOT%{_libdir}/libpwrite.so
-ln -sf libnet.so $RPM_BUILD_ROOT%{_libdir}/libpwrite.so
-ln -sf libnet.a $RPM_BUILD_ROOT%{_libdir}/libpwrite.a
+ln -sf libnet.so.1.0	$RPM_BUILD_ROOT%{_libdir}/libnet.so
+ln -sf libnet.so	$RPM_BUILD_ROOT%{_libdir}/libpwrite.so
+ln -sf libnet.a		$RPM_BUILD_ROOT%{_libdir}/libpwrite.a
 
 gzip -9nf README doc/CHANGELOG*
 
@@ -107,7 +106,6 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/*
-%attr(755,root,root) %{_libdir}/libpwrite
 %attr(755,root,root) %{_libdir}/lib*.so
 %{_includedir}/*.h
 %{_includedir}/libnet
