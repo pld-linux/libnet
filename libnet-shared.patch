@@ -39,6 +39,6 @@ diff -Nru libnet.orig/src/Makefile.am libnet/src/Makefile.am
  			libnet_link_win32.c
  
 -libnet_a_LIBADD = @LIBOBJS@
-+libnet_la_LIBADD = @LIBOBJS@
++libnet_la_LIBADD = @LTLIBOBJS@
 +libnet_la_LDFLAGS = -version-info 2:0:0
  
