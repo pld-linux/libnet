@@ -1,5 +1,6 @@
 Summary:	"libpwrite" Network Routine Library
 Summary(pl):	Biblioteka czynno¶ci sieciowych
+Summary(pt_BR):	API para funções de rede de baixo nível
 Name:		libnet
 Version:	1.0.2a
 Release:	4
@@ -28,9 +29,15 @@ functionality.
 Biblioteka dostarcza API dla popularnych nisko-poziomowych funkcji
 sieciowych (g³ównie wstrzykuj±cych pakiety).
 
+%description -l pt_BR
+Este pacote fornece uma API simples para funções de rede de baixo
+nível comumente usadas (principalmente injeção de pacotes). Usando
+libnet, é simples construir e enviar pacotes de rede arbitrários.
+
 %package devel
 Summary:	Header files and develpment documentation for libnet
 Summary(pl):	Pliki nag³ówkowe i dokumetacja do libnet
+Summary(pt_BR):	Arquivos do pacote libnet para desenvolvimento
 Group:		Development/Libraries
 Requires:	%{name} = %{version}
 
@@ -40,9 +47,14 @@ Header files and develpment documentation for libnet.
 %description devel -l pl
 Pliki nag³ówkowe i dokumetacja do libnet.
 
+%description devel -l pt_BR
+Arquivos de cabeçalho e bibliotecas usadas no desenvolvimento de
+aplicativos que usam libnet.
+
 %package static
 Summary:	Static libnet library
 Summary(pl):	Biblioteka statyczna libnet
+Summary(pt_BR):	Arquivos do pacote libnet para desenvolvimento estático
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}
 
@@ -51,6 +63,10 @@ Static libnet library.
 
 %description static -l pl
 Biblioteka statyczna libnet.
+
+%description static -l pt_BR
+Arquivos de cabeçalho e bibliotecas usadas no desenvolvimento de
+aplicativos estáticos que usam libnet.
 
 %prep
 %setup -q -n Libnet-%{version}
