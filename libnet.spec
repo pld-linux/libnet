@@ -3,7 +3,7 @@ Summary(pl):	Biblioteka C do przeno¶nego tworzenia i wprowadzania pakietów
 Summary(pt_BR):	API para funções de rede de baixo nível
 Name:		libnet
 Version:	1.1.2.1
-Release:	2
+Release:	3
 Epoch:		1
 License:	BSD
 Group:		Libraries
@@ -104,7 +104,7 @@ libnet - programy przyk³adowe.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_examplesdir}/%{name}-%{version},%{_mandir}/man3}
+install -d $RPM_BUILD_ROOT{%{_examplesdir}/%{name}-%{version},%{_mandir}/man3,%{_bindir}}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
@@ -113,6 +113,7 @@ ln -sf libnet.so	$RPM_BUILD_ROOT%{_libdir}/libpwrite.so
 ln -sf libnet.a		$RPM_BUILD_ROOT%{_libdir}/libpwrite.a
 install sample/*.[ch]	$RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 install doc/man/man3/libnet-functions.h.3 $RPM_BUILD_ROOT/%{_mandir}/man3
+install libnet-config	$RPM_BUILD_ROOT%{_bindir}/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -127,6 +128,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/libnet-config
 %attr(755,root,root) %{_libdir}/lib*.so
 %{_libdir}/lib*.la
 %{_includedir}/*.h
