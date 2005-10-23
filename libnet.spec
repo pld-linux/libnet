@@ -112,8 +112,8 @@ install -d $RPM_BUILD_ROOT{%{_examplesdir}/%{name}-%{version},%{_mandir}/man3,%{
 ln -sf libnet.so	$RPM_BUILD_ROOT%{_libdir}/libpwrite.so
 ln -sf libnet.a		$RPM_BUILD_ROOT%{_libdir}/libpwrite.a
 install sample/*.[ch]	$RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
-install doc/man/man3/libnet-functions.h.3 $RPM_BUILD_ROOT/%{_mandir}/man3
-install libnet-config	$RPM_BUILD_ROOT%{_bindir}/
+install doc/man/man3/libnet-functions.h.3 $RPM_BUILD_ROOT%{_mandir}/man3
+install libnet-config	$RPM_BUILD_ROOT%{_bindir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
