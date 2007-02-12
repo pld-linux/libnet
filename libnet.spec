@@ -1,6 +1,6 @@
 Summary:	C library for portable packet creation and injection
-Summary(pl):	Biblioteka C do przeno∂nego tworzenia i wprowadzania pakietÛw
-Summary(pt_BR):	API para funÁıes de rede de baixo nÌvel
+Summary(pl.UTF-8):   Biblioteka C do przeno≈õnego tworzenia i wprowadzania pakiet√≥w
+Summary(pt_BR.UTF-8):   API para fun√ß√µes de rede de baixo n√≠vel
 Name:		libnet
 Version:	1.1.2.1
 Release:	3
@@ -27,65 +27,65 @@ stuff). Libnet includes packet creation at the IP layer and at the
 link layer as well as a host of supplementary and complementary
 functionality.
 
-%description -l pl
+%description -l pl.UTF-8
 Biblioteka dostarcza API dla popularnych niskopoziomowych funkcji
-sieciowych (g≥Ûwnie wprowadzania pakietÛw). Przy uøyciu libnet moøna
-≥atwo stworzyÊ dowolne pakiety sieciowe. Biblioteka dostarcza
-przeno∂ny szkielet do niskopoziomowego zapisu i obs≥ugi pakietÛw
-sieciowych (w po≥±czeniu z libpcap moøna napisaÊ co∂ naprawdÍ
-fajnego). Libnet obejmuje tworzenie pakietÛw w warstwie IP i
-po≥±czenia, a takøe funkcjonalno∂Ê dodatkow± i uzupe≥niaj±c±.
+sieciowych (g≈Ç√≥wnie wprowadzania pakiet√≥w). Przy u≈ºyciu libnet mo≈ºna
+≈Çatwo stworzyƒá dowolne pakiety sieciowe. Biblioteka dostarcza
+przeno≈õny szkielet do niskopoziomowego zapisu i obs≈Çugi pakiet√≥w
+sieciowych (w po≈ÇƒÖczeniu z libpcap mo≈ºna napisaƒá co≈õ naprawdƒô
+fajnego). Libnet obejmuje tworzenie pakiet√≥w w warstwie IP i
+po≈ÇƒÖczenia, a tak≈ºe funkcjonalno≈õƒá dodatkowƒÖ i uzupe≈ÇniajƒÖcƒÖ.
 
-%description -l pt_BR
-Este pacote fornece uma API simples para funÁıes de rede de baixo
-nÌvel comumente usadas (principalmente injeÁ„o de pacotes). Usando
-libnet, È simples construir e enviar pacotes de rede arbitr·rios.
+%description -l pt_BR.UTF-8
+Este pacote fornece uma API simples para fun√ß√µes de rede de baixo
+n√≠vel comumente usadas (principalmente inje√ß√£o de pacotes). Usando
+libnet, √© simples construir e enviar pacotes de rede arbitr√°rios.
 
 %package devel
 Summary:	Header files and develpment documentation for libnet
-Summary(pl):	Pliki nag≥Ûwkowe i dokumetacja do libnet
-Summary(pt_BR):	Arquivos do pacote libnet para desenvolvimento
+Summary(pl.UTF-8):   Pliki nag≈Ç√≥wkowe i dokumetacja do libnet
+Summary(pt_BR.UTF-8):   Arquivos do pacote libnet para desenvolvimento
 Group:		Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description devel
 Header files and develpment documentation for libnet.
 
-%description devel -l pl
-Pliki nag≥Ûwkowe i dokumentacja do libnet.
+%description devel -l pl.UTF-8
+Pliki nag≈Ç√≥wkowe i dokumentacja do libnet.
 
-%description devel -l pt_BR
-Arquivos de cabeÁalho e bibliotecas usadas no desenvolvimento de
+%description devel -l pt_BR.UTF-8
+Arquivos de cabe√ßalho e bibliotecas usadas no desenvolvimento de
 aplicativos que usam libnet.
 
 %package static
 Summary:	Static libnet library
-Summary(pl):	Biblioteka statyczna libnet
-Summary(pt_BR):	Arquivos do pacote libnet para desenvolvimento est·tico
+Summary(pl.UTF-8):   Biblioteka statyczna libnet
+Summary(pt_BR.UTF-8):   Arquivos do pacote libnet para desenvolvimento est√°tico
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 
 %description static
 Static libnet library.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Biblioteka statyczna libnet.
 
-%description static -l pt_BR
-Arquivos de cabeÁalho e bibliotecas usadas no desenvolvimento de
-aplicativos est·ticos que usam libnet.
+%description static -l pt_BR.UTF-8
+Arquivos de cabe√ßalho e bibliotecas usadas no desenvolvimento de
+aplicativos est√°ticos que usam libnet.
 
 %package examples
 Summary:	libnet - example programs
-Summary(pl):	libnet - programy przyk≥adowe
+Summary(pl.UTF-8):   libnet - programy przyk≈Çadowe
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 
 %description examples
 libnet - example programs.
 
-%description examples -l pl
-libnet - programy przyk≥adowe.
+%description examples -l pl.UTF-8
+libnet - programy przyk≈Çadowe.
 
 %prep
 %setup -q -n %{name}
