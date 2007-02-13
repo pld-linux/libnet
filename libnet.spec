@@ -1,6 +1,6 @@
 Summary:	C library for portable packet creation and injection
-Summary(pl.UTF-8):   Biblioteka C do przenośnego tworzenia i wprowadzania pakietów
-Summary(pt_BR.UTF-8):   API para funções de rede de baixo nível
+Summary(pl.UTF-8):	Biblioteka C do przenośnego tworzenia i wprowadzania pakietów
+Summary(pt_BR.UTF-8):	API para funções de rede de baixo nível
 Name:		libnet
 Version:	1.1.2.1
 Release:	3
@@ -43,8 +43,8 @@ libnet, é simples construir e enviar pacotes de rede arbitrários.
 
 %package devel
 Summary:	Header files and develpment documentation for libnet
-Summary(pl.UTF-8):   Pliki nagłówkowe i dokumetacja do libnet
-Summary(pt_BR.UTF-8):   Arquivos do pacote libnet para desenvolvimento
+Summary(pl.UTF-8):	Pliki nagłówkowe i dokumetacja do libnet
+Summary(pt_BR.UTF-8):	Arquivos do pacote libnet para desenvolvimento
 Group:		Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -60,8 +60,8 @@ aplicativos que usam libnet.
 
 %package static
 Summary:	Static libnet library
-Summary(pl.UTF-8):   Biblioteka statyczna libnet
-Summary(pt_BR.UTF-8):   Arquivos do pacote libnet para desenvolvimento estático
+Summary(pl.UTF-8):	Biblioteka statyczna libnet
+Summary(pt_BR.UTF-8):	Arquivos do pacote libnet para desenvolvimento estático
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 
@@ -77,7 +77,7 @@ aplicativos estáticos que usam libnet.
 
 %package examples
 Summary:	libnet - example programs
-Summary(pl.UTF-8):   libnet - programy przykładowe
+Summary(pl.UTF-8):	libnet - programy przykładowe
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 
