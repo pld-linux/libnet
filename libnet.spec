@@ -3,7 +3,7 @@ Summary(pl.UTF-8):	Biblioteka C do przenośnego tworzenia i wprowadzania pakiet�
 Summary(pt_BR.UTF-8):	API para funções de rede de baixo nível
 Name:		libnet
 Version:	1.1.2.1
-Release:	5
+Release:	6
 Epoch:		1
 License:	BSD
 Group:		Libraries
@@ -12,6 +12,7 @@ Source0:	http://www.packetfactory.net/libnet/dist/%{name}-%{version}.tar.gz
 Patch0:		%{name}-shared.patch
 Patch1:		%{name}-am.patch
 Patch2:		%{name}-leaking-fd.patch
+Patch3:		%{name}-proc.patch
 URL:		http://www.packetfactory.net/libnet/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -93,6 +94,7 @@ libnet - programy przykładowe.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 %{__libtoolize}
