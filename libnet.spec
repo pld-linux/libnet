@@ -3,7 +3,7 @@ Summary(pl.UTF-8):	Biblioteka C do przenośnego tworzenia i wprowadzania pakiet�
 Summary(pt_BR.UTF-8):	API para funções de rede de baixo nível
 Name:		libnet
 Version:	1.1.2.1
-Release:	6
+Release:	7
 Epoch:		1
 License:	BSD
 Group:		Libraries
@@ -108,10 +108,15 @@ libnet - programy przykładowe.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_examplesdir}/%{name}-%{version},%{_mandir}/man3,%{_bindir}}
+install -d $RPM_BUILD_ROOT{%{_examplesdir}/%{name}-%{version},%{_mandir}/man3} \
+	$RPM_BUILD_ROOT{/%{_lib},%{_bindir}}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
+
+mv $RPM_BUILD_ROOT%{_libdir}/libnet.so.*.*.* $RPM_BUILD_ROOT/%{_lib}
+ln -sf /%{_lib}/$(cd $RPM_BUILD_ROOT/%{_lib} ; echo libnet.so.*.*.*) \
+        $RPM_BUILD_ROOT%{_libdir}/libnet.so
 
 ln -sf libnet.so	$RPM_BUILD_ROOT%{_libdir}/libpwrite.so
 ln -sf libnet.a		$RPM_BUILD_ROOT%{_libdir}/libpwrite.a
@@ -128,7 +133,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README doc/{CHANGELOG,MIGRATION,PACKET_BUILDING}
-%attr(755,root,root) %{_libdir}/lib*.so.*.*
+%attr(755,root,root) /%{_lib}/lib*.so.*.*
 
 %files devel
 %defattr(644,root,root,755)
