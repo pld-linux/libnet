@@ -2,18 +2,18 @@ Summary:	C library for portable packet creation and injection
 Summary(pl.UTF-8):	Biblioteka C do przenośnego tworzenia i wprowadzania pakietów
 Summary(pt_BR.UTF-8):	API para funções de rede de baixo nível
 Name:		libnet
-Version:	1.1.2.1
-Release:	7
+Version:	1.1.6
+Release:	1
 Epoch:		1
 License:	BSD
 Group:		Libraries
-Source0:	http://www.packetfactory.net/libnet/dist/%{name}-%{version}.tar.gz
-# Source0-md5:	be845c41170d72c7db524f3411b50256
+Source0:	http://sourceforge.net/projects/libnet-dev/files/%{name}-%{version}.tar.gz
+# Source0-md5:	710296fe424a49344e5fcc0d09e53317
 Patch0:		%{name}-shared.patch
 Patch1:		%{name}-am.patch
 Patch2:		%{name}-leaking-fd.patch
 Patch3:		%{name}-proc.patch
-URL:		http://www.packetfactory.net/libnet/
+URL:		http://www.sourceforge.net/projects/libnet-dev/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
@@ -90,9 +90,7 @@ libnet - example programs.
 libnet - programy przykładowe.
 
 %prep
-%setup -q -n %{name}
-%patch0 -p1
-%patch1 -p1
+%setup -q
 %patch2 -p1
 %patch3 -p1
 
@@ -101,10 +99,9 @@ libnet - programy przykładowe.
 %{__aclocal}
 %{__autoconf}
 %{__automake}
-%configure \
-	--with-pf_packet=yes
-%{__make} \
-	CFLAGS="%{rpmcflags}"
+%configure
+
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -114,12 +111,10 @@ install -d $RPM_BUILD_ROOT{%{_examplesdir}/%{name}-%{version},%{_mandir}/man3} \
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-mv $RPM_BUILD_ROOT%{_libdir}/libnet.so.*.*.* $RPM_BUILD_ROOT/%{_lib}
+mv $RPM_BUILD_ROOT%{_libdir}/libnet.so.* $RPM_BUILD_ROOT/%{_lib}
 ln -sf /%{_lib}/$(cd $RPM_BUILD_ROOT/%{_lib} ; echo libnet.so.*.*.*) \
         $RPM_BUILD_ROOT%{_libdir}/libnet.so
 
-ln -sf libnet.so	$RPM_BUILD_ROOT%{_libdir}/libpwrite.so
-ln -sf libnet.a		$RPM_BUILD_ROOT%{_libdir}/libpwrite.a
 install sample/*.[ch]	$RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 install doc/man/man3/libnet-functions.h.3 $RPM_BUILD_ROOT%{_mandir}/man3
 install libnet-config	$RPM_BUILD_ROOT%{_bindir}
@@ -134,6 +129,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc README doc/{CHANGELOG,MIGRATION,PACKET_BUILDING}
 %attr(755,root,root) /%{_lib}/lib*.so.*.*
+%attr(755,root,root) %ghost /%{_lib}/lib*.so.1
 
 %files devel
 %defattr(644,root,root,755)

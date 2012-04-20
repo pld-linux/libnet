@@ -3,7 +3,7 @@
 @@ -12,18 +12,9 @@
  dnl results:    HAVE_LINUX_PROCFS
  dnl
- AC_DEFUN(AC_LIBNET_LINUX_PROCFS,
+ AC_DEFUN([AC_LIBNET_LINUX_PROCFS],
 -    [AC_MSG_CHECKING(for Linux proc filesystem)
 -    AC_CACHE_VAL(ac_cv_libnet_linux_procfs,
 -        if test "x`cat /proc/sys/kernel/ostype 2>&-`" = "xLinux" ; then
