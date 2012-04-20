@@ -9,10 +9,8 @@ License:	BSD
 Group:		Libraries
 Source0:	http://sourceforge.net/projects/libnet-dev/files/%{name}-%{version}.tar.gz
 # Source0-md5:	710296fe424a49344e5fcc0d09e53317
-Patch0:		%{name}-shared.patch
-Patch1:		%{name}-am.patch
-Patch2:		%{name}-leaking-fd.patch
-Patch3:		%{name}-proc.patch
+Patch0:		%{name}-leaking-fd.patch
+Patch1:		%{name}-proc.patch
 URL:		http://www.sourceforge.net/projects/libnet-dev/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -91,8 +89,8 @@ libnet - programy przykładowe.
 
 %prep
 %setup -q
-%patch2 -p1
-%patch3 -p1
+%patch0 -p1
+%patch1 -p1
 
 %build
 %{__libtoolize}
