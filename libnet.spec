@@ -7,11 +7,11 @@ Release:	1
 Epoch:		1
 License:	BSD
 Group:		Libraries
-Source0:	http://sourceforge.net/projects/libnet-dev/files/%{name}-%{version}.tar.gz
+Source0:	http://downloads.sourceforge.net/libnet-dev/%{name}-%{version}.tar.gz
 # Source0-md5:	710296fe424a49344e5fcc0d09e53317
 Patch0:		%{name}-leaking-fd.patch
 Patch1:		%{name}-proc.patch
-URL:		http://www.sourceforge.net/projects/libnet-dev/
+URL:		http://sourceforge.net/projects/libnet-dev/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
@@ -126,21 +126,21 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README doc/{CHANGELOG,MIGRATION,PACKET_BUILDING}
-%attr(755,root,root) /%{_lib}/lib*.so.*.*
-%attr(755,root,root) %ghost /%{_lib}/lib*.so.1
+%attr(755,root,root) /%{_lib}/libnet.so.*.*.*
+%attr(755,root,root) %ghost /%{_lib}/libnet.so.1
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/libnet-config
-%attr(755,root,root) %{_libdir}/lib*.so
-%{_libdir}/lib*.la
-%{_includedir}/*.h
+%attr(755,root,root) %{_libdir}/libnet.so
+%{_libdir}/libnet.la
+%{_includedir}/libnet.h
 %{_includedir}/libnet
-%{_mandir}/man*/*
+%{_mandir}/man3/libnet*.h.3*
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/lib*.a
+%{_libdir}/libnet.a
 
 %files examples
 %defattr(644,root,root,755)
