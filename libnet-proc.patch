@@ -1,5 +1,5 @@
---- libnet/acinclude.m4~	2004-01-16 00:53:06.000000000 +0100
-+++ libnet/acinclude.m4	2009-08-28 21:58:51.368425567 +0200
+--- libnet-1.2/m4/acinclude.m4~	2004-01-16 00:53:06.000000000 +0100
++++ libnet-1.2/m4/acinclude.m4	2009-08-28 21:58:51.368425567 +0200
 @@ -12,18 +12,9 @@
  dnl results:    HAVE_LINUX_PROCFS
  dnl
