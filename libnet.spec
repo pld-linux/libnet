@@ -85,9 +85,7 @@ aplicativos estáticos que usam libnet.
 Summary:	API documentation for libnet
 Summary(pl.UTF-8):	Dokumentacja API biblioteki libnet
 Group:		Documentation
-%if "%{_rpmversion}" >= "4.6"
 BuildArch:	noarch
-%endif
 
 %description apidocs
 API documentation for libnet.
@@ -100,9 +98,7 @@ Summary:	libnet - example programs
 Summary(pl.UTF-8):	libnet - programy przykładowe
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
-%if "%{_rpmversion}" >= "4.6"
 BuildArch:	noarch
-%endif
 
 %description examples
 libnet - example programs.
